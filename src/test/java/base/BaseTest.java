@@ -17,8 +17,10 @@ import org.testng.annotations.BeforeTest;
 public class BaseTest {
 	
 	public WebDriver driver;
-	public FileInputStream fis1;
-	public Properties configProp;
+	public static FileInputStream fis1;
+	public static Properties configProp;
+	public static FileInputStream fis2;
+	public static Properties locatorsProp;
 	
 	@BeforeTest
 	public void  fileSetUp() throws IOException
@@ -29,9 +31,15 @@ public class BaseTest {
 		
 		configProp.load(fis1);
 		
+		fis2=new FileInputStream("src\\test\\resources\\Properties\\locators.properties");
+		
+		locatorsProp=new Properties();
+		
+		locatorsProp.load(fis2);
+		
 	}
 	
-	@BeforeMethod
+	//@BeforeMethod
 	public void setup()
 	{
 		String browserName=configProp.getProperty("browser");
@@ -59,7 +67,7 @@ public class BaseTest {
 	
 	}
 	
-	@AfterMethod
+	//@AfterMethod
 	public void teardown() 
 	{
 		try {
